@@ -62,10 +62,10 @@ jobs:
             - _build
             - ~/.mix
 
-      - run: script/test_examples # run tests for examples
+      - run: mix dialyzer # Run dialyzer
 
       - store_test_results:  # upload junit test results for display in Test Summary
-          path: _build/test/ex_health # Replace with the name of your :app
+          path: _build/test/ecto_changeset_tools # Replace with the name of your :app
 
       - run:
           name: Codecov Report
