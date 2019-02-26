@@ -9,6 +9,7 @@ defmodule EctoChangesetTools.MixProject do
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
       deps: deps(),
+      description: description(),
       docs: docs(),
       package: package()
     ]
@@ -27,6 +28,10 @@ defmodule EctoChangesetTools.MixProject do
       {:excoveralls, "~> 0.4", only: [:test], runtime: false},
       {:ex_doc, "~> 0.19", only: [:dev], runtime: false}
     ]
+  end
+
+  defp description do
+    "EctoChangesetTools is a library that extends the validation and formatting utilities found in Ecto.Changeset"
   end
 
   defp docs do
