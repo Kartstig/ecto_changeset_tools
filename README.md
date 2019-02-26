@@ -1,6 +1,7 @@
 # Ecto Changeset Tools
+> Don't go schema-writing without em
 
-**TODO: Add description**
+[![CircleCI](https://circleci.com/gh/Kartstig/ecto_changeset_tools/tree/master.svg?style=svg)](https://circleci.com/gh/Kartstig/ecto_changeset_tools/tree/master) [![codecov](https://codecov.io/gh/Kartstig/ecto_changeset_tools/branch/master/graph/badge.svg)](https://codecov.io/gh/Kartstig/ecto_changeset_tools)
 
 ## Installation
 
