@@ -21,7 +21,17 @@ defmodule FormattersTest do
       Ecto.Changeset.change(struct(schema), %{stringy: "SOMETHING ELSE ALL CAPS 1234!@"})
       |> EctoChangesetTools.Formatters.downcase_field(:stringy)
 
-    assert %{stringy: "something else all caps 1234!@"} = result.changes
+    assert %{stringy: "something else all caps 1234!@"} == result.changes
+  end
+
+  test "downcase_field/2 ignores nil values", %{schema: schema} do
+    result =
+      Ecto.Changeset.change(struct(schema), %{stringy: nil})
+      |> EctoChangesetTools.Formatters.downcase_field(:stringy)
+
+    field = Map.get(result.changes, :stringy)
+
+    assert nil == field
   end
 
   test "downcase_fields/2 turns all uppercase to lowercase", %{schema: schema} do
