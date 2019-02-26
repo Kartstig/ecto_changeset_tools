@@ -24,11 +24,35 @@ defmodule ValidatorsTest do
     assert true == result.valid?
   end
 
-  test "validate_phone_field/2 returns invalid for invalid numbers", %{schema: schema} do
+  test "validate_phone_field/2 returns invalid for numbers too short", %{schema: schema} do
     result =
       Ecto.Changeset.change(struct(schema), %{stringy: "123"})
       |> EctoChangesetTools.Validators.validate_phone_field(:stringy)
 
     assert false == result.valid?
+  end
+
+  test "validate_phone_field/2 returns invalid for numbers too long", %{schema: schema} do
+    result =
+      Ecto.Changeset.change(struct(schema), %{stringy: "12345678901234"})
+      |> EctoChangesetTools.Validators.validate_phone_field(:stringy)
+
+    assert false == result.valid?
+  end
+
+  test "validate_phone_field/2 returns valid for nil fields", %{schema: schema} do
+    result =
+      Ecto.Changeset.change(struct(schema), %{stringy: nil})
+      |> EctoChangesetTools.Validators.validate_phone_field(:stringy)
+
+    assert true == result.valid?
+  end
+
+  test "validate_phone_field/2 returns valid for empty fields", %{schema: schema} do
+    result =
+      Ecto.Changeset.change(struct(schema), %{stringy: ""})
+      |> EctoChangesetTools.Validators.validate_phone_field(:stringy)
+
+    assert true == result.valid?
   end
 end
