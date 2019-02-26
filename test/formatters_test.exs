@@ -54,14 +54,23 @@ defmodule FormattersTest do
     assert 10 == String.length(field)
   end
 
-  test "sanitize_phone_field/2 ignores nil values", %{schema: schema} do
+  test "sanitize_phone_field/2 ignores empty values", %{schema: schema} do
     result =
-      Ecto.Changeset.change(struct(schema), %{stringy: "(123)456-7890!!!,,..? --"})
+      Ecto.Changeset.change(struct(schema), %{stringy: ""})
       |> EctoChangesetTools.Formatters.sanitize_phone_field(:stringy)
 
     field = Map.get(result.changes, :stringy)
 
-    assert "1234567890" == field
-    assert 10 == String.length(field)
+    assert "" == field
+  end
+
+  test "sanitize_phone_field/2 ignores nil values", %{schema: schema} do
+    result =
+      Ecto.Changeset.change(struct(schema), %{stringy: nil})
+      |> EctoChangesetTools.Formatters.sanitize_phone_field(:stringy)
+
+    field = Map.get(result.changes, :stringy)
+
+    assert nil == field
   end
 end
